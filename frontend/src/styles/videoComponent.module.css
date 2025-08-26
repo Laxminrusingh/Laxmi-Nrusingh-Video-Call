@@ -1,61 +1,460 @@
 .meetVideoContainer {
     position: relative;
     height: 100vh;
-    background: rgb(1, 4, 48);
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    overflow: hidden;
 }
 
-.meetUserVideo {
-    position: absolute;
-    bottom: 10vh;
-    height: 20vh;
-    width: auto;
-    left: 0;
-    border-radius: 20px;
+.lobbyContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    padding: 20px;
 }
+
+.lobbyCard {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.lobbyCard h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    background: linear-gradient(45deg, #4a90e2, #357abd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.meetingInfo {
+    background: linear-gradient(45deg, #4a90e2, #357abd);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.previewVideo {
+    margin-top: 25px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.previewVideo video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #333;
+}
+
+.meetingInfoBar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    z-index: 10;
+}
+
+.meetingDetails {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.meetingDetails span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inviteSection {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.inviteButton {
+    background: linear-gradient(45deg, #4a90e2, #357abd);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+}
+
+.inviteButton:hover {
+    background: linear-gradient(45deg, #357abd, #2a5f8f);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(74, 144, 226, 0.4);
+}
+
+.topRightControls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 20;
+}
+
+.topButton {
+    background: rgba(0, 0, 0, 0.7) !important;
+    color: white !important;
+    border: 2px solid rgba(255,255,255,0.2) !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease !important;
+}
+
+.topButton:hover {
+    background: linear-gradient(45deg, rgba(74, 144, 226, 0.8), rgba(53, 122, 189, 0.8)) !important;
+    transform: scale(1.1);
+    border-color: rgba(255,255,255,0.4) !important;
+}
+
+
 
 .buttonContainers {
     position: absolute;
     width: 100vw;
-    bottom: 0;
+    bottom: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 10;
 }
 
 .buttonContainers svg {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
-.conferenceView { 
+.buttonContainers button {
+    background: rgba(60, 60, 60, 0.8);
+    border-radius: 50%;
+    padding: 12px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+}
 
+.buttonContainers button:hover {
+    background: linear-gradient(45deg, rgba(74, 144, 226, 0.8), rgba(53, 122, 189, 0.8));
+    transform: scale(1.1);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.buttonContainers button:nth-child(2) {
+    background: linear-gradient(45deg, #ff4757, #ff3742);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+    animation: endCallPulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.buttonContainers button:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.buttonContainers button:nth-child(2):hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.buttonContainers button:nth-child(2):hover {
+    background: linear-gradient(45deg, #ff3742, #ff2f3a);
+    transform: scale(1.15);
+    box-shadow: 0 12px 35px rgba(255, 71, 87, 0.6);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes endCallPulse {
+    0% {
+        box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 12px 35px rgba(255, 71, 87, 0.6);
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 8px 25px rgba(255, 71, 87, 0.4);
+        transform: scale(1);
+    }
+}
+
+
+.conferenceView {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 100px);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.conferenceView video {
+    width: 100%;
+    max-width: 380px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    background: #1a1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.conferenceView video:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(74, 144, 226, 0.4);
+    border-color: #4a90e2;
+}
+
+.conferenceView .participant {
     display: flex;
-    
-    padding: 10px;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    position: relative;
+    transition: transform 0.2s ease;
 }
 
-.conferenceView  video {
-    width: 40vw;
-    height: 20vh;
-    min-width: 30vw;
-    border-radius: 10px;
+.conferenceView .participant:hover {
+    transform: translateY(-5px);
+}
+
+.conferenceView .participantName {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 8px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
+    padding: 4px 12px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.participantId {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+@media (max-width: 900px) {
+    .conferenceView {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        padding: 12px;
+        height: calc(100vh - 120px);
+    }
+    .conferenceView video {
+        max-width: 95vw;
+        height: 160px;
+        border-radius: 10px;
+    }
+    .conferenceView .participantName {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+    .buttonContainers {
+        bottom: 10px;
+        gap: 10px;
+    }
+    .buttonContainers svg {
+        font-size: 2rem;
+    }
+    .buttonContainers button {
+        padding: 10px;
+    }
+    .meetingInfoBar {
+        position: relative;
+        top: 10px;
+        left: 10px;
+        margin-bottom: 10px;
+    }
+    .inviteSection {
+        position: relative;
+        top: 10px;
+        right: 10px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .inviteButton {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    .topRightControls {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        flex-direction: row;
+        gap: 8px;
+    }
+    .topButton {
+        padding: 8px !important;
+    }
+    .lobbyCard {
+        padding: 30px 20px;
+        margin: 10px;
+    }
 }
 
 .chatRoom {
     position: absolute;
-    height: 90vh;
-    right: 0;
-    background: white;
-    border-radius: 10px;
-    width: 30vw;
-    padding-inline: 20px;
+    height: 85vh;
+    right: 20px;
+    top: 60px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    width: 320px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    z-index: 15;
 }
 
 .chatContainer {
     position: relative;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.chatHeader h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.closeButton:hover {
+    background: rgba(0,0,0,0.1);
 }
 
 
 .chattingArea {
-    position: absolute;
-    bottom: 0;
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    align-items: flex-end;
+}
+
+.sendButton {
+    background: linear-gradient(45deg, #4a90e2, #357abd) !important;
+    min-width: 80px !important;
+    height: 40px !important;
+}
+
+.chattingDisplay {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100% - 140px);
+    padding: 10px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.messageItem {
+    margin-bottom: 15px;
+    padding: 8px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.messageSender {
+    font-weight: bold;
+    color: #4a90e2;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.messageText {
+    color: #333;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.messageStatus {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: right;
+}
+
+.messageItem[data-system="true"] {
+    background: #e8f4fd;
+    border-left: 3px solid #4a90e2;
+}
+
+.messageItem[data-system="true"] .messageSender {
+    color: #357abd;
+}
+
+.messageItem[data-system="true"] .messageText {
+    font-style: italic;
+    color: #555;
 }
